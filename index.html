@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm"taikhoan:" vào trước mỗi tài </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add "taikhoan:" Prefix Tool</h1>
+    <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+    <button onclick="addPrefix()">Thêm "taikhoan:"</button>
+    <h2>Result:</h2>
+    <textarea id="outputText" readonly></textarea>
+
+    <script>
+        function addPrefix() {
+            const input = document.getElementById('inputText').value;
+            const lines = input.split('\n');
+            const prefixedLines = lines.map(line => line.trim() ? 'taikhoan:' + line : line);
+            const output = prefixedLines.join('\n');
+            document.getElementById('outputText').value = output;
+        }
+    </script>
+</body>
+</html>
+
+t
+
+T
+
