@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm"taikhoan:" vào trước mỗi tài </title>
+    <title>Thêm"https://x.com/" vào trước mỗi tài </title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,9 +29,9 @@
     </style>
 </head>
 <body>
-    <h1>Add "taikhoan:" Prefix Tool</h1>
+    <h1>Add "https://x.com/" Prefix Tool</h1>
     <textarea id="inputText" placeholder="Enter your text here..."></textarea>
-    <button onclick="addPrefix()">Thêm "taikhoan:"</button>
+    <button onclick="addPrefix()">Thêm "https://x.com/"</button>
     <h2>Result:</h2>
     <textarea id="outputText" readonly></textarea>
 
@@ -39,7 +39,7 @@
         function addPrefix() {
             const input = document.getElementById('inputText').value;
             const lines = input.split('\n');
-            const prefixedLines = lines.map(line => line.trim() ? 'taikhoan:' + line : line);
+            const prefixedLines = lines.map(line => line.trim() ? 'https://x.com/' + line : line);
             const output = prefixedLines.join('\n');
             document.getElementById('outputText').value = output;
         }
