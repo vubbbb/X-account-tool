@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm từ khóa vào trước mỗi dòng</title>
+    <title>Công cụ xử lý văn bản</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -27,19 +27,53 @@
             color: white;
             border: none;
             cursor: pointer;
+            margin-right: 5px;
+            margin-bottom: 10px;
         }
         button:hover {
             background-color: #45a049;
         }
+        .result-container {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #0b7dda;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
-    <h1>Thêm từ khóa vào trước mỗi dòng</h1>
-    <input type="text" id="prefixInput" placeholder="Nhập từ khóa cần thêm vào (ví dụ: https://x.com/)">
-    <textarea id="inputText" placeholder="Nhập nội dung của bạn ở đây..."></textarea>
-    <button onclick="addPrefix()">Thêm từ khóa</button>
-    <h2>Kết quả:</h2>
-    <textarea id="outputText" readonly></textarea>
+    <h1>Công cụ xử lý văn bản</h1>
+    
+    <div class="tool-section">
+        <h2>Thêm từ khóa vào trước mỗi dòng</h2>
+        <input type="text" id="prefixInput" placeholder="Nhập từ khóa cần thêm vào (ví dụ: https://x.com/)">
+        <textarea id="inputText" placeholder="Nhập nội dung của bạn ở đây..."></textarea>
+        
+        <div class="button-group">
+            <button onclick="addPrefix()">Thêm từ khóa</button>
+            <button onclick="extractUsernames()">Trích xuất Usernames</button>
+        </div>
+        
+        <h2>Kết quả:</h2>
+        <div class="result-container">
+            <textarea id="outputText" readonly></textarea>
+            <button class="copy-btn" onclick="copyToClipboard('outputText')">Copy</button>
+        </div>
+    </div>
 
     <script>
         function addPrefix() {
@@ -49,6 +83,38 @@
             const prefixedLines = lines.map(line => line.trim() ? prefix + line : line);
             const output = prefixedLines.join('\n');
             document.getElementById('outputText').value = output;
+        }
+        
+        function extractUsernames() {
+            const input = document.getElementById('inputText').value;
+            const lines = input.split('\n');
+            const usernames = [];
+            
+            for (const line of lines) {
+                if (line.trim()) {
+                    // Format is expected to be: Username|password|etc...
+                    const parts = line.split('|');
+                    if (parts.length > 0) {
+                        usernames.push(parts[0]);
+                    }
+                }
+            }
+            
+            document.getElementById('outputText').value = usernames.join('\n');
+        }
+        
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const copyBtn = event.target;
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 1500);
         }
     </script>
 </body>
